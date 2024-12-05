@@ -197,6 +197,42 @@
         </div>
     </section>
 
+    <button id="toggle-token-btn">Mostrar Token</button>
+    <div id="token-display"></div>
+
+    <script>
+        // Elementos del DOM
+        const toggleTokenBtn = document.getElementById("toggle-token-btn");
+        const tokenDisplay = document.getElementById("token-display");
+
+        // Variable para almacenar el token (asegúrate de que `app.js` lo actualice)
+        let currentToken = "";
+
+        // Escucha mensajes desde otros scripts (app.js)
+        window.addEventListener("message", (event) => {
+            if (event.data.type === "FCM_TOKEN") {
+                currentToken = event.data.token; // Actualiza el token cuando se recibe
+                console.log("Token recibido en index.html:", currentToken);
+            }
+        });
+
+        // Manejo del botón para mostrar/ocultar el token
+        toggleTokenBtn.addEventListener("click", () => {
+            if (tokenDisplay.style.display === "none") {
+                if (!currentToken) {
+                    tokenDisplay.textContent = "Token no disponible.";
+                } else {
+                    tokenDisplay.textContent = currentToken;
+                }
+                tokenDisplay.style.display = "block";
+                toggleTokenBtn.textContent = "Ocultar Token";
+            } else {
+                tokenDisplay.style.display = "none";
+                toggleTokenBtn.textContent = "Mostrar Token";
+            }
+        });
+    </script>
+
     <!-- Footer -->
     <footer class="bg-dark text-light text-center py-4">
         <div class="container">

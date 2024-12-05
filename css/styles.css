@@ -104,5 +104,13 @@
       text-align: center;
       padding: 20px 0;
   }
+
+  #token-display {
+    margin-top: 20px;
+    padding: 10px;
+    background: #f4f4f4;
+    border: 1px solid #ccc;
+    display: none; /* Inicialmente oculto */
+}
   
   
