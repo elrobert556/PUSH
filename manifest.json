@@ -1,0 +1,16 @@
+{
+    "name": "compartetusazon",
+    "short_name": "compartetusazon",
+    "start_url": "/index.html",
+    "display": "standalone",
+    "background_color": "#f4af76",
+    "theme_color": "#f4af76",
+    "icons": [
+      {
+        "src": "img/icon.png",
+        "sizes": "512x512",
+        "type": "image/png"
+      }
+    ]
+  }
+  
