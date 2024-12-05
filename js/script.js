@@ -16,3 +16,16 @@ navLinks.forEach(link => {
         }
     });
 });
+
+// Seleccionamos el botón y el contenedor con la clase 'token-display'
+const toggleButton = document.getElementById('toggleButton');
+const tokenDisplay = document.querySelector('.token-display');
+
+// Función para alternar la visibilidad del elemento con la clase 'token-display'
+toggleButton.addEventListener('click', () => {
+  if (tokenDisplay.style.display === 'none') {
+    tokenDisplay.style.display = 'block'; // Mostrar el elemento
+  } else {
+    tokenDisplay.style.display = 'none'; // Ocultar el elemento
+  }
+});
