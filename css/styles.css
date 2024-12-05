@@ -105,12 +105,18 @@
       padding: 20px 0;
   }
 
-  #token-display {
-    margin-top: 20px;
+  .token-display {
+    display: none; /* Oculta en producción */
+    margin: 20px;
     padding: 10px;
-    background: #f4f4f4;
-    border: 1px solid #ccc;
-    display: none; /* Inicialmente oculto */
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.token-display h2 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
 }
   
   
