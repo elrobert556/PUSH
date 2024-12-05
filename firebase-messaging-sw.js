@@ -19,24 +19,6 @@ firebase.initializeApp(firebaseConfig);
 // Inicializa Firebase Messaging
 const messaging = firebase.messaging();
 
-// Envía el token al cliente principal
-messaging.getToken({ vapidKey: 'BI1TEbpDHL9LU0ms8iX3iHKkisguomMRcA6nWqVvImsvhYDK9OkINqlEAKjVdv56MK2UJLOpUqTTEcfGladJRog' }).then((currentToken) => {
-  if (currentToken) {
-    console.log('Token obtenido:', currentToken);
-
-    // Enviar el token al cliente usando postMessage
-    self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then((clients) => {
-      if (clients && clients.length) {
-        clients[0].postMessage({ token: currentToken });
-      }
-    });
-  } else {
-    console.log('No se pudo obtener el token.');
-  }
-}).catch((err) => {
-  console.error('Error al obtener el token:', err);
-});
-
 // Manejo de notificaciones en segundo plano
 messaging.onBackgroundMessage((payload) => {
   console.log('[firebase-messaging-sw.js] Mensaje recibido en segundo plano:', payload);

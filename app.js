@@ -21,46 +21,27 @@ const app = initializeApp(firebaseConfig);
 const messaging = getMessaging(app);
 
 // Registra el Service Worker y solicita el token
-// navigator.serviceWorker.register('/firebase-messaging-sw.js')
-//   .then((registration) => {
-//     console.log('Service Worker registrado correctamente:', registration);
-
-//     // Obtén el token de Firebase Messaging
-//     getToken(messaging, { vapidKey: 'BI1TEbpDHL9LU0ms8iX3iHKkisguomMRcA6nWqVvImsvhYDK9OkINqlEAKjVdv56MK2UJLOpUqTTEcfGladJRog', serviceWorkerRegistration: registration })
-//       .then((currentToken) => {
-//         if (currentToken) {
-//           console.log('Token de registro obtenido:', currentToken);
-//           // Envía este token a tu servidor si es necesario
-//         } else {
-//           console.warn('No se pudo obtener el token. Asegúrate de que las notificaciones estén habilitadas.');
-//         }
-//       })
-//       .catch((err) => {
-//         console.error('Error al obtener el token:', err);
-//       });
-//   })
-//   .catch((error) => {
-//     console.error('Error al registrar el Service Worker:', error);
-//   });
 navigator.serviceWorker.register('/firebase-messaging-sw.js')
   .then((registration) => {
-    console.log('Service Worker registrado exitosamente:', registration);
+    console.log('Service Worker registrado correctamente:', registration);
 
-    navigator.serviceWorker.addEventListener('message', (event) => {
-      if (event.data && event.data.token) {
-        console.log('Token recibido del Service Worker:', event.data.token);
-        // Muestra el token en el DOM o usa lógica adicional
-        const tokenContainer = document.getElementById('token-container');
-        if (tokenContainer) {
-          tokenContainer.textContent = `Token: ${event.data.token}`;
+    // Obtén el token de Firebase Messaging
+    getToken(messaging, { vapidKey: 'BI1TEbpDHL9LU0ms8iX3iHKkisguomMRcA6nWqVvImsvhYDK9OkINqlEAKjVdv56MK2UJLOpUqTTEcfGladJRog', serviceWorkerRegistration: registration })
+      .then((currentToken) => {
+        if (currentToken) {
+          console.log('Token de registro obtenido:', currentToken);
+          // Envía este token a tu servidor si es necesario
+        } else {
+          console.warn('No se pudo obtener el token. Asegúrate de que las notificaciones estén habilitadas.');
         }
-      }
-    });
+      })
+      .catch((err) => {
+        console.error('Error al obtener el token:', err);
+      });
   })
-  .catch((err) => {
-    console.error('Error al registrar el Service Worker:', err);
+  .catch((error) => {
+    console.error('Error al registrar el Service Worker:', error);
   });
-
 
 // Manejo de mensajes en primer plano
 onMessage(messaging, (payload) => {
