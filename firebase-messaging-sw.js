@@ -33,3 +33,27 @@ messaging.onBackgroundMessage((payload) => {
   // Muestra la notificación
   return self.registration.showNotification(notificationTitle, notificationOptions);
 });
+
+self.addEventListener('notificationclick', (event) => {
+  console.log('Notificación clickeada:', event.notification);
+  
+  // Cierra la notificación al hacer clic
+  event.notification.close();
+
+  // Redirige a una URL específica
+  event.waitUntil(
+    clients.matchAll({ type: 'window', includeUncontrolled: true }).then((clientList) => {
+      // Si ya hay una pestaña abierta con la URL, la enfoca
+      for (const client of clientList) {
+        if (client.url === '/' && 'focus' in client) {
+          return client.focus();
+        }
+      }
+
+      // Si no hay pestaña abierta, abre una nueva
+      if (clients.openWindow) {
+        return clients.openWindow('/');
+      }
+    })
+  );
+});
